@@ -1,0 +1,63 @@
+.btn {
+  padding: 10px 20px;
+  font-size: 16px;
+  font-weight: 700;
+  cursor: pointer;
+  border: none;
+  transition: all 0.3s ease;
+}
+
+.navbar-btn {
+  background: transparent;
+  height: 100%;
+  color: #fffbeb;
+  font-size: 40px;
+  padding: 0 20px;
+  font-weight: 900;
+  text-transform: uppercase;
+  text-shadow: 3px 3px 0px #495579;
+}
+
+.navbar-btn:hover,
+.navbar-btn.active {
+  color: #495579;
+  text-shadow: 3px 3px 0px #fffbeb;
+}
+
+.primary-btn,
+.error-btn {
+  font-size: 20px;
+}
+
+.primary-btn {
+  background: #fffbeb;
+  color: #251749;
+}
+
+.primary-btn:hover {
+  color: #fffbeb;
+  background: #251749;
+}
+
+.error-btn {
+  background: #263159;
+  color: #fffbeb;
+}
+
+.error-btn:hover {
+  background: rgb(151, 0, 0);
+}
+
+.icon-btn {
+  padding: 0;
+  font-size: 24px;
+  font-weight: 900;
+  color: #fffbeb;
+  text-shadow: 2px 2px 0px #495579;
+  background: transparent;
+}
+
+.icon-btn:hover {
+  color: #495579;
+  text-shadow: 2px 2px 0px #fffbeb;
+}

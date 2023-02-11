@@ -1,0 +1,23 @@
+.sm {
+  font-size: 16px;
+}
+
+.md {
+  font-size: 24px;
+}
+
+.lg {
+  font-size: 40px;
+}
+
+.brand {
+  color: #fffbeb;
+  font-weight: 900;
+  text-transform: uppercase;
+  text-shadow: 3px 3px 0px #495579;
+}
+
+.regular {
+  color: #fffbeb;
+  font-weight: 600;
+}

@@ -9,11 +9,13 @@ function App() {
   const [user, setUser] = useState({ guest: true })
   const [isLoginModalOpen, setIsLoginModalOpen] = useState(false)
   const openLoginModal = () => {
-    setIsLoginModalOpen(true)
+    if (user.guest) {
+      setIsLoginModalOpen(true)
+    }
   }
 
   return (
-    <UserContext.Provider value={{ ...user, setUser, openLoginModal }}>
+    <UserContext.Provider value={{ user, setUser, openLoginModal }}>
       <LoginModal
         open={isLoginModalOpen}
         onClose={() => setIsLoginModalOpen(false)}

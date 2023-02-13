@@ -29,6 +29,13 @@
   margin-bottom: 10px;
 }
 
+.modal-content {
+  padding: 6px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
 .modal-actions {
   display: flex;
   justify-content: flex-end;

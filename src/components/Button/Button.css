@@ -7,23 +7,6 @@
   transition: all 0.3s ease;
 }
 
-.navbar-btn {
-  background: transparent;
-  height: 100%;
-  color: #fffbeb;
-  font-size: 40px;
-  padding: 0 20px;
-  font-weight: 900;
-  text-transform: uppercase;
-  text-shadow: 3px 3px 0px #495579;
-}
-
-.navbar-btn:hover,
-.navbar-btn.active {
-  color: #495579;
-  text-shadow: 3px 3px 0px #fffbeb;
-}
-
 .primary-btn,
 .error-btn {
   font-size: 20px;

@@ -1,0 +1,16 @@
+.navbar-link {
+  color: #fffbeb;
+  font-size: 40px;
+  padding: 0 20px;
+  font-weight: 900;
+  text-transform: uppercase;
+  text-shadow: 3px 3px 0px #495579;
+  text-decoration: none;
+  transition: all 0.3s ease;
+}
+
+.navbar-link.active,
+.navbar-link.hoverable:hover {
+  color: #495579;
+  text-shadow: 3px 3px 0px #fffbeb;
+}

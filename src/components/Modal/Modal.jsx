@@ -5,7 +5,7 @@ const Header = ({ children, onClose }) => {
   return (
     <div className='modal-header'>
       {children}
-      <Button variant='icon' onClick={onClose}>
+      <Button variant='icon' onClick={onClose} type='button'>
         X
       </Button>
     </div>

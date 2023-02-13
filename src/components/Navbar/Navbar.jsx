@@ -1,33 +1,31 @@
 import { useContext } from "react"
-import { useNavigate } from "react-router-dom"
-import { Button } from "../"
+import { Button, NavbarLink } from "../"
+import { routes } from "../../constants"
 import { UserContext } from "../../context"
 import "./Navbar.css"
 
 export function Navbar() {
-  const { openLoginModal } = useContext(UserContext)
-  const navigate = useNavigate()
-
-  function goTo(path) {
-    return () => navigate(path)
-  }
-
+  const { user, setUser, openLoginModal } = useContext(UserContext)
   return (
     <div className='navbar-container'>
       <div className='nav-buttons'>
-        <Button variant='navbar'>GoodmanShop</Button>
-        <Button variant='navbar' onClick={goTo("/")}>
-          Главная
-        </Button>
-        <Button variant='navbar' onClick={goTo("/about")}>
-          О магазине
-        </Button>
+        <NavbarLink to={routes.HOME} logo>
+          GoodmanShop
+        </NavbarLink>
+        <NavbarLink to={routes.HOME}>Главная</NavbarLink>
+        <NavbarLink to={routes.ABOUT}>О магазине</NavbarLink>
       </div>
       <div className='user-buttons'>
         <Button variant='primary'>Корзина</Button>
-        <Button variant='primary' onClick={openLoginModal}>
-          Войти
-        </Button>
+        {user.guest ? (
+          <Button variant='primary' onClick={openLoginModal}>
+            Войти
+          </Button>
+        ) : (
+          <Button variant='primary' onClick={() => setUser({ guest: true })}>
+            Выйти
+          </Button>
+        )}
       </div>
     </div>
   )

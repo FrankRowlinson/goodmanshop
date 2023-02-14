@@ -1,1 +1,2 @@
-export { routes } from "./routes.js"
+export { routes } from "./routes"
+export { endPoints } from "./endPoints"

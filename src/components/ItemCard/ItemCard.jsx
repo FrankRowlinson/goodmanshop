@@ -1,9 +1,13 @@
+import { NavLink } from "react-router-dom"
+import { routes } from "../../constants"
 import { Typography } from "../Typography/Typography"
 import "./ItemCard.css"
 
-const Title = ({ children }) => (
+const Title = ({ children, id }) => (
   <div className='item-card__title'>
-    <Typography variant='bold'>{children}</Typography>
+    <NavLink to={`${routes.PRODUCTS}/${id}`} className='item-card__link'>
+      <Typography variant='bold'>{children}</Typography>
+    </NavLink>
   </div>
 )
 
@@ -13,7 +17,13 @@ const Price = ({ children }) => (
   </div>
 )
 
-const Image = ({ src }) => <img className='item-card__image' src={src} alt='' />
+const Image = ({ src, id }) => (
+  <NavLink to={`${routes.PRODUCTS}/${id}`}>
+    <div className='item-card__image'>
+      <img src={src} alt='' />
+    </div>
+  </NavLink>
+)
 
 const Actions = ({ children }) => (
   <div className='item-card__actions'>{children}</div>

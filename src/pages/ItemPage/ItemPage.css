@@ -1,0 +1,34 @@
+.item-page {
+  display: flex;
+  width: 800px;
+  flex-wrap: wrap;
+  margin: 10px 15px;
+  background: #263159;
+  box-shadow: 5px 5px 0px #fffbeb;
+}
+
+.item-page__image {
+  width: 300px;
+}
+
+.item-page__image > img {
+  object-fit: cover;
+  width: 300px;
+}
+
+.item-page__info {
+  padding: 6px;
+  flex-basis: 0;
+  flex-grow: 1;
+}
+
+.item-page__cart {
+  display: flex;
+  justify-content: flex-end;
+}
+
+.item-page__description {
+  display: inline-block;
+  padding: 6px;
+  margin-top: 10px;
+}

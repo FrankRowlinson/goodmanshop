@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react"
 import { Button, ItemCard, Spinner } from "../../components"
-import { fetchProducts } from "../../services/fetchProducts"
+import { fetchProducts } from "../../services"
 import "./MainPage.css"
 
 export function MainPage() {
@@ -21,8 +21,8 @@ export function MainPage() {
         products.map((item) => {
           return (
             <ItemCard key={item.id}>
-              <ItemCard.Image src={item.images[0]} />
-              <ItemCard.Title>{item.title}</ItemCard.Title>
+              <ItemCard.Image src={item.images[0]} id={item.id} />
+              <ItemCard.Title id={item.id}>{item.title}</ItemCard.Title>
               <ItemCard.Price>{item.price}</ItemCard.Price>
               <ItemCard.Actions>
                 <Button>Добавить в корзину</Button>

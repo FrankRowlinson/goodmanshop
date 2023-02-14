@@ -2,11 +2,11 @@
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  min-width: 300px;
+  width: 300px;
   min-height: 300px;
   background: #263159;
   box-shadow: 5px 5px 0px #fffbeb;
-  margin: 20px;
+  margin: 15px;
 }
 
 .item-card__price,
@@ -17,13 +17,27 @@
 
 .item-card__image {
   height: 200px;
-  border: none;
-  outline: none;
+  width: 100%;
+  overflow: hidden;
+}
+
+.item-card__image > img {
   object-fit: cover;
+  height: 200px;
+  width: 100%;
+  transition: all 0.3s;
+}
+
+.item-card__image:hover > img {
+  transform: scale(1.2);
 }
 
 .item-card__actions,
 .item-card__price {
   display: flex;
   justify-content: flex-end;
+}
+
+.item-card__link {
+  text-decoration: none;
 }

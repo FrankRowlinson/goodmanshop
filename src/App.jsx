@@ -1,6 +1,6 @@
 import "./App.css"
 import { Routes, Route } from "react-router-dom"
-import { MainPage, AboutPage, NotFoundPage } from "./pages"
+import { MainPage, ItemPage, AboutPage, NotFoundPage } from "./pages"
 import { LoginModal, Navbar } from "./components"
 import { UserContext } from "./context"
 import { useState } from "react"
@@ -21,11 +21,14 @@ function App() {
         onClose={() => setIsLoginModalOpen(false)}
       />
       <Navbar />
-      <Routes>
-        <Route path='/' element={<MainPage />} />
-        <Route path='/about' element={<AboutPage />} />
-        <Route path='*' element={<NotFoundPage />} />
-      </Routes>
+      <div className='App'>
+        <Routes>
+          <Route path='/' element={<MainPage />} />
+          <Route path='/about' element={<AboutPage />} />
+          <Route path='/products/:id' element={<ItemPage />} />
+          <Route path='*' element={<NotFoundPage />} />
+        </Routes>
+      </div>
     </UserContext.Provider>
   )
 }

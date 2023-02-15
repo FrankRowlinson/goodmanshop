@@ -25,9 +25,9 @@ const Image = ({ src, id }) => (
   </NavLink>
 )
 
-const Actions = ({ children }) => (
-  <div className='item-card__actions'>{children}</div>
-)
+const Actions = ({ children }) => {
+  return <div className='item-card__actions'>{children}</div>
+}
 
 function ItemCard({ children }) {
   return <div className='item-card paper'>{children}</div>

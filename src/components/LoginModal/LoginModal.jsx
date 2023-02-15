@@ -19,7 +19,7 @@ export function LoginModal({ onClose, ...restProps }) {
   const handleSubmit = (event) => {
     event.preventDefault()
     if (CREDENTIALS[formValues.login] === formValues.password) {
-      setUser({ guest: false })
+      setUser(formValues.login)
       setFormValues({ login: "", password: "" })
       setShowError(false)
       onClose()

@@ -1,11 +1,13 @@
-import { useState, useEffect } from "react"
+import { useState, useEffect, useContext } from "react"
 import { useParams } from "react-router-dom"
 import { Button, Spinner, Typography } from "../../components"
+import { UserContext } from "../../context"
 import { fetchProductById } from "../../services"
 import "./ItemPage.css"
 
 export function ItemPage() {
   const { id } = useParams()
+  const { user } = useContext(UserContext)
   const [product, setProduct] = useState(null)
   useEffect(() => {
     async function fetchData() {
@@ -39,7 +41,13 @@ export function ItemPage() {
               <Typography variant='regular' size='md'>
                 {product.price}.-
               </Typography>
-              <Button variant='primary'>Добавить в корзину</Button>
+              {user ? (
+                <Button variant='primary'>Добавить в корзину</Button>
+              ) : (
+                <Typography variant='regular'>
+                  Войдите, чтобы купить товар
+                </Typography>
+              )}
             </div>
           </div>
         </div>

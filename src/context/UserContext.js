@@ -1,3 +1,3 @@
 import { createContext } from "react"
 
-export const UserContext = createContext({ guest: true })
+export const UserContext = createContext()

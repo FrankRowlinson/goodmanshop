@@ -5,7 +5,7 @@ import { UserContext } from "../../context"
 import "./Navbar.css"
 
 export function Navbar() {
-  const { user, setUser, openLoginModal } = useContext(UserContext)
+  const { user, logout, openLoginModal } = useContext(UserContext)
   return (
     <div className='navbar-container'>
       <div className='nav-buttons'>
@@ -17,12 +17,12 @@ export function Navbar() {
       </div>
       <div className='user-buttons'>
         <Button variant='primary'>Корзина</Button>
-        {user.guest ? (
+        {!user ? (
           <Button variant='primary' onClick={openLoginModal}>
             Войти
           </Button>
         ) : (
-          <Button variant='primary' onClick={() => setUser({ guest: true })}>
+          <Button variant='primary' onClick={logout}>
             Выйти
           </Button>
         )}

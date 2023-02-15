@@ -11,7 +11,6 @@ export function Input({ name, label, ...restProps }) {
           </Typography>
         </label>
       )}
-
       <input id={name} name={name} {...restProps} />
     </div>
   )

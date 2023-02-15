@@ -1,10 +1,13 @@
-import { useState, useEffect } from "react"
-import { Button, ItemCard, Spinner } from "../../components"
+import { useState, useEffect, useContext } from "react"
+import { Button, ItemCard, Spinner, Typography } from "../../components"
+import { CartContext, UserContext } from "../../context"
 import { fetchProducts } from "../../services"
 import "./MainPage.css"
 
 export function MainPage() {
   const [products, setProducts] = useState(null)
+  const { addToCart } = useContext(CartContext)
+  const { user } = useContext(UserContext)
 
   useEffect(() => {
     async function fetchData() {
@@ -26,7 +29,15 @@ export function MainPage() {
                 <ItemCard.Title id={item.id}>{item.title}</ItemCard.Title>
                 <ItemCard.Price>{item.price}</ItemCard.Price>
                 <ItemCard.Actions>
-                  <Button>Добавить в корзину</Button>
+                  {user ? (
+                    <Button onClick={() => addToCart(item.id, 1)}>
+                      Купить
+                    </Button>
+                  ) : (
+                    <Typography variant='regular'>
+                      Войдите, чтобы купить товар
+                    </Typography>
+                  )}
                 </ItemCard.Actions>
               </ItemCard>
             )

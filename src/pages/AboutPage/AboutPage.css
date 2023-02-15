@@ -1,0 +1,10 @@
+.about-page {
+  align-self: self-start;
+  max-width: 800px;
+  padding: 6px;
+  margin: 10px 15px;
+}
+
+.about-page .bold {
+  display: inline;
+}

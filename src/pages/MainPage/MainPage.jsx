@@ -14,23 +14,25 @@ export function MainPage() {
     fetchData()
   }, [])
   return (
-    <div className='main-page'>
+    <>
       {!products ? (
         <Spinner />
       ) : (
-        products.map((item) => {
-          return (
-            <ItemCard key={item.id}>
-              <ItemCard.Image src={item.images[0]} id={item.id} />
-              <ItemCard.Title id={item.id}>{item.title}</ItemCard.Title>
-              <ItemCard.Price>{item.price}</ItemCard.Price>
-              <ItemCard.Actions>
-                <Button>Добавить в корзину</Button>
-              </ItemCard.Actions>
-            </ItemCard>
-          )
-        })
+        <div className='main-page'>
+          {products.map((item) => {
+            return (
+              <ItemCard key={item.id}>
+                <ItemCard.Image src={item.images[0]} id={item.id} />
+                <ItemCard.Title id={item.id}>{item.title}</ItemCard.Title>
+                <ItemCard.Price>{item.price}</ItemCard.Price>
+                <ItemCard.Actions>
+                  <Button>Добавить в корзину</Button>
+                </ItemCard.Actions>
+              </ItemCard>
+            )
+          })}
+        </div>
       )}
-    </div>
+    </>
   )
 }

@@ -24,7 +24,7 @@ function Modal({ open, children }) {
   if (!open) return
   return (
     <div className='modal-container'>
-      <div className='modal'>{children}</div>
+      <div className='modal paper'>{children}</div>
     </div>
   )
 }

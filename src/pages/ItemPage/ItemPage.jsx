@@ -15,11 +15,11 @@ export function ItemPage() {
     fetchData()
   }, [id])
   return (
-    <div className='item-page'>
+    <>
       {!product ? (
         <Spinner />
       ) : (
-        <>
+        <div className='item-page paper'>
           <div className='item-page__image'>
             <img src={product.images[0]} alt='' />
           </div>
@@ -42,8 +42,8 @@ export function ItemPage() {
               <Button variant='primary'>Добавить в корзину</Button>
             </div>
           </div>
-        </>
+        </div>
       )}
-    </div>
+    </>
   )
 }

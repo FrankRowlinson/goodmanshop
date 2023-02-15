@@ -1,4 +1,11 @@
 .App {
   display: flex;
   justify-content: center;
+  align-items: center;
+  min-height: 70vh;
+}
+
+.paper {
+  background: #263159;
+  box-shadow: 5px 5px 0px #fffbeb;
 }

@@ -3,8 +3,7 @@
   width: 800px;
   flex-wrap: wrap;
   margin: 10px 15px;
-  background: #263159;
-  box-shadow: 5px 5px 0px #fffbeb;
+  align-self: self-start;
 }
 
 .item-page__image {

@@ -30,7 +30,7 @@ const Actions = ({ children }) => (
 )
 
 function ItemCard({ children }) {
-  return <div className='item-card'>{children}</div>
+  return <div className='item-card paper'>{children}</div>
 }
 
 ItemCard.Title = Title

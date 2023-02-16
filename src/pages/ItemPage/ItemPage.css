@@ -35,6 +35,7 @@
   padding: 6px 10px;
   background: #251749;
   box-shadow: 3px 3px 0px #fffbeb;
+  margin-bottom: 3px;
 }
 
 .quantity-controller > .icon-btn {

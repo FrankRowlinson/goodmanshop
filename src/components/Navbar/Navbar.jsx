@@ -1,11 +1,16 @@
-import { useContext } from "react"
+import { useContext, useState } from "react"
 import { Button, NavbarLink } from "../"
 import { routes } from "../../constants"
 import { UserContext } from "../../context"
+import { CartDropdown } from "../CartDropdown/CartDropdown"
 import "./Navbar.css"
 
 export function Navbar() {
   const { user, logout, openLoginModal } = useContext(UserContext)
+  const [cartOpen, setCartOpen] = useState(false)
+
+  const handleCartOpen = () => setCartOpen((prev) => !prev)
+
   return (
     <div className='navbar-container'>
       <div className='nav-buttons'>
@@ -16,7 +21,6 @@ export function Navbar() {
         <NavbarLink to={routes.ABOUT}>О магазине</NavbarLink>
       </div>
       <div className='user-buttons'>
-        <Button variant='primary'>Корзина</Button>
         {!user ? (
           <Button variant='primary' onClick={openLoginModal}>
             Войти
@@ -24,6 +28,15 @@ export function Navbar() {
         ) : (
           <Button variant='primary' onClick={logout}>
             Выйти
+          </Button>
+        )}
+        {user && (
+          <Button variant='primary' onClick={handleCartOpen} tabIndex={0}>
+            Корзина{" "}
+            <span id='toggler' className={!cartOpen ? "cart-closed" : ""}>
+              V
+            </span>
+            {cartOpen && <CartDropdown onClose={() => setCartOpen(false)} />}
           </Button>
         )}
       </div>

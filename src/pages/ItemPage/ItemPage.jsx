@@ -1,14 +1,20 @@
 import { useState, useEffect, useContext } from "react"
 import { useParams } from "react-router-dom"
 import { Button, Spinner, Typography } from "../../components"
-import { UserContext } from "../../context"
+import { CartContext, UserContext } from "../../context"
 import { fetchProductById } from "../../services"
 import "./ItemPage.css"
 
 export function ItemPage() {
+  const [quantityToAdd, setQuantityToAdd] = useState(1)
+  const [product, setProduct] = useState(null)
   const { id } = useParams()
   const { user } = useContext(UserContext)
-  const [product, setProduct] = useState(null)
+  const { addToCart } = useContext(CartContext)
+
+  const increment = () => setQuantityToAdd((prev) => Math.max(prev + 1, 0))
+  const decrement = () => setQuantityToAdd((prev) => Math.max(prev - 1, 0))
+
   useEffect(() => {
     async function fetchData() {
       const product = await fetchProductById(id)
@@ -16,6 +22,7 @@ export function ItemPage() {
     }
     fetchData()
   }, [id])
+
   return (
     <>
       {!product ? (
@@ -35,14 +42,32 @@ export function ItemPage() {
               <Typography variant='regular' size='sm'>
                 {product.description}
               </Typography>
-            </div>
-
-            <div className='item-page__cart'>
               <Typography variant='regular' size='md'>
                 {product.price}.-
               </Typography>
+            </div>
+
+            <div className='item-page__cart'>
               {user ? (
-                <Button variant='primary'>Добавить в корзину</Button>
+                <>
+                  <div className='quantity-controller'>
+                    <Button variant='icon' onClick={decrement}>
+                      –
+                    </Button>
+                    <Typography variant='regular' size='md'>
+                      {quantityToAdd}
+                    </Typography>
+                    <Button variant='icon' onClick={increment}>
+                      +
+                    </Button>
+                  </div>
+                  <Button
+                    variant='primary'
+                    onClick={() => addToCart(product, quantityToAdd)}
+                  >
+                    Добавить в корзину
+                  </Button>
+                </>
               ) : (
                 <Typography variant='regular'>
                   Войдите, чтобы купить товар

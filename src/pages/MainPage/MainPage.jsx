@@ -12,7 +12,7 @@ export function MainPage() {
   useEffect(() => {
     async function fetchData() {
       const data = await fetchProducts()
-      setProducts(data)
+      setProducts(data.slice(0, 24))
     }
     fetchData()
   }, [])
@@ -30,9 +30,7 @@ export function MainPage() {
                 <ItemCard.Price>{item.price}</ItemCard.Price>
                 <ItemCard.Actions>
                   {user ? (
-                    <Button onClick={() => addToCart(item.id, 1)}>
-                      Купить
-                    </Button>
+                    <Button onClick={() => addToCart(item, 1)}>Купить</Button>
                   ) : (
                     <Typography variant='regular'>
                       Войдите, чтобы купить товар

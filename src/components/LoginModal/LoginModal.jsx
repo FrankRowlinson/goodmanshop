@@ -1,6 +1,8 @@
 import { Modal, Typography, Button, Input, ErrorMessage } from "../"
 import { useState, useContext } from "react"
 import { UserContext } from "../../context"
+import { useNavigate } from "react-router-dom"
+import { routes } from "../../constants"
 
 const CREDENTIALS = { admin: "admin", user: "user" }
 
@@ -8,6 +10,7 @@ export function LoginModal({ onClose, ...restProps }) {
   const { setUser } = useContext(UserContext)
   const [showError, setShowError] = useState(false)
   const [formValues, setFormValues] = useState({ login: "", password: "" })
+  const navigate = useNavigate()
 
   function setInput(name) {
     const onChange = (event) => {
@@ -23,6 +26,7 @@ export function LoginModal({ onClose, ...restProps }) {
       setFormValues({ login: "", password: "" })
       setShowError(false)
       onClose()
+      navigate(routes.HOME)
     } else {
       setShowError(true)
       setFormValues((prev) => ({ ...prev, password: "" }))

@@ -4,10 +4,8 @@ import { UserContext } from "../../context"
 import { useNavigate } from "react-router-dom"
 import { routes } from "../../constants"
 
-const CREDENTIALS = { admin: "admin", user: "user" }
-
 export function LoginModal({ onClose, ...restProps }) {
-  const { setUser } = useContext(UserContext)
+  const { login } = useContext(UserContext)
   const [showError, setShowError] = useState(false)
   const [formValues, setFormValues] = useState({ login: "", password: "" })
   const navigate = useNavigate()
@@ -21,8 +19,8 @@ export function LoginModal({ onClose, ...restProps }) {
 
   const handleSubmit = (event) => {
     event.preventDefault()
-    if (CREDENTIALS[formValues.login] === formValues.password) {
-      setUser(formValues.login)
+    const success = login(formValues.login, formValues.password)
+    if (success) {
       setFormValues({ login: "", password: "" })
       setShowError(false)
       onClose()

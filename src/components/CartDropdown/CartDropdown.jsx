@@ -5,16 +5,14 @@ import { useContext } from "react"
 import { CartContext } from "../../context"
 
 export function CartDropdown() {
-  const { cart, clearCart } = useContext(CartContext)
-  const cartItems = useMemo(
-    () =>
-      Object.keys(cart)
-        .filter((el) => el !== "total")
-        .reduce((acc, item) => acc + parseInt(cart[item]), 0),
-    [cart]
-  )
+  const { cartItems, clearCart, getTotalPrice } = useContext(CartContext)
+  const totalItemsInCart = useMemo(() => {
+    return cartItems.reduce((totalAmount, item) => {
+      return totalAmount + item.quantity
+    }, 0)
+  }, [cartItems])
 
-  const cartPositions = useMemo(() => Object.keys(cart).length - 1, [cart])
+  const cartPositions = useMemo(() => cartItems.length, [cartItems])
 
   return (
     <div
@@ -23,8 +21,8 @@ export function CartDropdown() {
     >
       <Typography variant='regular' size='sm'>
         {cartItems
-          ? `В корзине ${cartItems} товаров среди ${cartPositions} позиций на общую
-        сумму ${cart.total}.-`
+          ? `В корзине ${totalItemsInCart} товаров среди ${cartPositions} позиций на общую
+        сумму ${getTotalPrice()}.-`
           : "Ваша корзина пуста"}
       </Typography>
       {!!cartItems && (

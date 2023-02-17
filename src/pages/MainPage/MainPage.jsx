@@ -6,7 +6,7 @@ import "./MainPage.css"
 
 export function MainPage() {
   const [products, setProducts] = useState(null)
-  const { addToCart } = useContext(CartContext)
+  const { addItem } = useContext(CartContext)
   const { user } = useContext(UserContext)
 
   useEffect(() => {
@@ -30,7 +30,7 @@ export function MainPage() {
                 <ItemCard.Price>{item.price}</ItemCard.Price>
                 <ItemCard.Actions>
                   {user ? (
-                    <Button onClick={() => addToCart(item, 1)}>Купить</Button>
+                    <Button onClick={() => addItem(item, 1)}>Купить</Button>
                   ) : (
                     <Typography variant='regular'>
                       Войдите, чтобы купить товар

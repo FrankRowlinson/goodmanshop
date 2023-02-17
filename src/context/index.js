@@ -1,2 +1,2 @@
-export { UserContext } from "./UserContext"
-export { CartContext } from "./CartContext"
+export { UserContext, UserProvider } from "./UserContext"
+export { CartContext, CartProvider } from "./CartContext"

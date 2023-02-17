@@ -10,7 +10,7 @@ export function ItemPage() {
   const [product, setProduct] = useState(null)
   const { id } = useParams()
   const { user } = useContext(UserContext)
-  const { addToCart } = useContext(CartContext)
+  const { addItem } = useContext(CartContext)
 
   const increment = () => setQuantityToAdd((prev) => Math.max(prev + 1, 0))
   const decrement = () => setQuantityToAdd((prev) => Math.max(prev - 1, 0))
@@ -63,7 +63,7 @@ export function ItemPage() {
                   </div>
                   <Button
                     variant='primary'
-                    onClick={() => addToCart(product, quantityToAdd)}
+                    onClick={() => addItem(product, quantityToAdd)}
                   >
                     Добавить в корзину
                   </Button>

@@ -1,9 +1,9 @@
-import { useState, useEffect } from "react"
-import { useAuth } from "./"
+import { useState, useEffect, useContext } from "react"
+import { UserContext } from "../context"
 
 export function useCart() {
   const [items, setItems] = useState([])
-  const { user } = useAuth()
+  const { user } = useContext(UserContext)
 
   useEffect(() => {
     if (user) {

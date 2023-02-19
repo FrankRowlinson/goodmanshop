@@ -18,23 +18,15 @@
   justify-content: center;
 }
 
-.user-buttons > .primary-btn {
+.navbar-container .inverted-btn {
   height: 100%;
 }
 
-#toggler {
-  display: inline-block;
-  color: #fffbeb;
-  background: #251749;
-  padding: 2px 6px;
-  font-weight: 900;
+.cart-block {
+  max-width: 300px;
+  min-width: 300px;
 }
 
-.cart-closed {
-  transform: rotateZ(0.5turn);
-}
-
-.btn:hover > #toggler {
-  color: #251749;
-  background: #fffbeb;
+.cart-block .btn {
+  font-size: 16px;
 }

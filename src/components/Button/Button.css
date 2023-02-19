@@ -8,7 +8,8 @@
 }
 
 .primary-btn,
-.error-btn {
+.error-btn,
+.inverted-btn {
   font-size: 18px;
 }
 
@@ -20,6 +21,16 @@
 .primary-btn:hover {
   color: #fffbeb;
   background: #251749;
+}
+
+.inverted-btn {
+  color: #fffbeb;
+  background: #251749;
+}
+
+.inverted-btn:hover {
+  background: #fffbeb;
+  color: #251749;
 }
 
 .error-btn {

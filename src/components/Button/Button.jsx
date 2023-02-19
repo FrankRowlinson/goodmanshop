@@ -3,6 +3,7 @@ import "./Button.css"
 
 const buttonStyles = {
   primary: "primary-btn",
+  inverted: "inverted-btn",
   error: "error-btn",
   icon: "icon-btn",
 }

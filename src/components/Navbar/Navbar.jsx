@@ -1,15 +1,20 @@
-import { useContext, useState } from "react"
+import { useContext, useMemo } from "react"
 import { Button, NavbarLink } from "../"
 import { routes } from "../../constants"
-import { UserContext } from "../../context"
-import { CartDropdown } from "../CartDropdown/CartDropdown"
+import { UserContext, CartContext } from "../../context"
 import "./Navbar.css"
 
 export function Navbar() {
   const { user, logout, openLoginModal } = useContext(UserContext)
-  const [cartOpen, setCartOpen] = useState(false)
+  const { cartItems, getTotalPrice } = useContext(CartContext)
 
-  const handleCartOpen = () => setCartOpen((prev) => !prev)
+  const totalItemsInCart = useMemo(() => {
+    return cartItems.reduce((totalAmount, item) => {
+      return totalAmount + item.quantity
+    }, 0)
+  }, [cartItems])
+
+  const cartPositions = useMemo(() => cartItems.length, [cartItems])
 
   return (
     <div className='navbar-container'>
@@ -20,23 +25,24 @@ export function Navbar() {
         <NavbarLink to={routes.HOME}>Главная</NavbarLink>
         <NavbarLink to={routes.ABOUT}>О магазине</NavbarLink>
       </div>
+      {user && (
+        <div className='cart-block'>
+          <Button variant='inverted'>
+            {cartItems.length
+              ? `В корзине ${totalItemsInCart} товаров среди ${cartPositions} позиций на общую
+        сумму ${getTotalPrice()}.-`
+              : "Ваша корзина пуста"}
+          </Button>
+        </div>
+      )}
       <div className='user-buttons'>
         {!user ? (
-          <Button variant='primary' onClick={openLoginModal}>
+          <Button variant='inverted' onClick={openLoginModal}>
             Войти
           </Button>
         ) : (
-          <Button variant='primary' onClick={logout}>
+          <Button variant='inverted' onClick={logout}>
             Выйти
-          </Button>
-        )}
-        {user && (
-          <Button variant='primary' onClick={handleCartOpen} tabIndex={0}>
-            Корзина{" "}
-            <span id='toggler' className={!cartOpen ? "cart-closed" : ""}>
-              V
-            </span>
-            {cartOpen && <CartDropdown onClose={() => setCartOpen(false)} />}
           </Button>
         )}
       </div>

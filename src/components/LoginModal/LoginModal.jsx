@@ -1,11 +1,12 @@
 import { Modal, Typography, Button, Input, ErrorMessage } from "../"
-import { useState, useContext } from "react"
-import { UserContext } from "../../context"
+import { useState } from "react"
 import { useNavigate } from "react-router-dom"
 import { routes } from "../../constants"
+import { useDispatch } from "react-redux"
+import { authenticate } from "../../store/thunks/userThunks"
 
 export function LoginModal({ onClose, ...restProps }) {
-  const { login } = useContext(UserContext)
+  const dispatch = useDispatch()
   const [showError, setShowError] = useState(false)
   const [formValues, setFormValues] = useState({ login: "", password: "" })
   const navigate = useNavigate()
@@ -19,7 +20,9 @@ export function LoginModal({ onClose, ...restProps }) {
 
   const handleSubmit = (event) => {
     event.preventDefault()
-    const success = login(formValues.login, formValues.password)
+    const success = dispatch(
+      authenticate(formValues.login, formValues.password)
+    )
     if (success) {
       setFormValues({ login: "", password: "" })
       setShowError(false)

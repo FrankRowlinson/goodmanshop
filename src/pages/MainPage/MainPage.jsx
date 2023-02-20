@@ -1,21 +1,35 @@
-import { useState, useEffect, useContext } from "react"
+import { useState, useEffect } from "react"
+import { useDispatch, useSelector } from "react-redux"
 import { Button, ItemCard, Spinner, Typography } from "../../components"
-import { CartContext, UserContext } from "../../context"
 import { fetchProducts } from "../../services"
+import { addToCart } from "../../store/slices"
 import "./MainPage.css"
 
+const limit = 20
+
 export function MainPage() {
-  const [products, setProducts] = useState(null)
-  const { addItem } = useContext(CartContext)
-  const { user } = useContext(UserContext)
+  const [products, setProducts] = useState([])
+  const [offset, setOffset] = useState(limit)
+  const [canFetchMore, setCanFetchMore] = useState(true)
+  const dispatch = useDispatch()
+  const user = useSelector((state) => state.user.username)
 
   useEffect(() => {
     async function fetchData() {
-      const data = await fetchProducts()
-      setProducts(data.slice(0, 24))
+      const data = await fetchProducts(0, limit)
+      setProducts(data)
     }
     fetchData()
   }, [])
+
+  const fetchMore = (offset) => async () => {
+    const data = await fetchProducts(offset, limit)
+    if (data.length < limit) {
+      setCanFetchMore(false)
+    }
+    setProducts((prev) => [...prev, ...data])
+    setOffset((prev) => prev + limit)
+  }
   return (
     <>
       {!products ? (
@@ -30,7 +44,13 @@ export function MainPage() {
                 <ItemCard.Price>{item.price}</ItemCard.Price>
                 <ItemCard.Actions>
                   {user ? (
-                    <Button onClick={() => addItem(item, 1)}>Купить</Button>
+                    <Button
+                      onClick={() =>
+                        dispatch(addToCart({ user, item, quantity: 1 }))
+                      }
+                    >
+                      Купить
+                    </Button>
                   ) : (
                     <Typography variant='regular'>
                       Войдите, чтобы купить товар
@@ -40,6 +60,11 @@ export function MainPage() {
               </ItemCard>
             )
           })}
+          {canFetchMore && (
+            <Button variant='primary' onClick={fetchMore(offset)}>
+              Загрузить еще товары
+            </Button>
+          )}
         </div>
       )}
     </>

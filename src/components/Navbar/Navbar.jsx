@@ -1,23 +1,32 @@
-import { useContext, useMemo } from "react"
-import { Button, NavbarLink } from "../"
+import { useMemo, useState } from "react"
+import { useDispatch, useSelector } from "react-redux"
+import { Button, LoginModal, NavbarLink } from "../"
 import { routes } from "../../constants"
-import { UserContext, CartContext } from "../../context"
+import { selectCurrentCart, selectTotalPrice } from "../../store/selectors"
+import { logout } from "../../store/slices"
 import "./Navbar.css"
 
 export function Navbar() {
-  const { user, logout, openLoginModal } = useContext(UserContext)
-  const { cartItems, getTotalPrice } = useContext(CartContext)
+  const dispatch = useDispatch()
+  const [isLoginModalOpen, setIsLoginModalOpen] = useState(false)
+  const user = useSelector((state) => state.user.username)
+  const cart = useSelector(selectCurrentCart)
+  const totalPrice = useSelector(selectTotalPrice)
 
   const totalItemsInCart = useMemo(() => {
-    return cartItems.reduce((totalAmount, item) => {
+    return cart.reduce((totalAmount, item) => {
       return totalAmount + item.quantity
     }, 0)
-  }, [cartItems])
+  }, [cart])
 
-  const cartPositions = useMemo(() => cartItems.length, [cartItems])
+  const cartPositions = useMemo(() => cart.length, [cart])
 
   return (
     <div className='navbar-container'>
+      <LoginModal
+        open={isLoginModalOpen}
+        onClose={() => setIsLoginModalOpen(false)}
+      />
       <div className='nav-buttons'>
         <NavbarLink to={routes.HOME} logo>
           GoodmanShop
@@ -28,20 +37,20 @@ export function Navbar() {
       {user && (
         <div className='cart-block'>
           <Button variant='inverted'>
-            {cartItems.length
+            {cart.length
               ? `В корзине ${totalItemsInCart} товаров среди ${cartPositions} позиций на общую
-        сумму ${getTotalPrice()}.-`
+        сумму ${totalPrice}.-`
               : "Ваша корзина пуста"}
           </Button>
         </div>
       )}
       <div className='user-buttons'>
         {!user ? (
-          <Button variant='inverted' onClick={openLoginModal}>
+          <Button variant='inverted' onClick={() => setIsLoginModalOpen(true)}>
             Войти
           </Button>
         ) : (
-          <Button variant='inverted' onClick={logout}>
+          <Button variant='inverted' onClick={() => dispatch(logout())}>
             Выйти
           </Button>
         )}

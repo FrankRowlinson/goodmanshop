@@ -1,49 +1,53 @@
-import { useState, useEffect, useContext } from "react"
+import { useState, useEffect } from "react"
+import { useDispatch, useSelector } from "react-redux"
 import { useParams } from "react-router-dom"
 import { Button, Spinner, Typography } from "../../components"
-import { CartContext, UserContext } from "../../context"
 import { fetchProductById } from "../../services"
+import { addToCart } from "../../store/slices"
 import "./ItemPage.css"
 
 export function ItemPage() {
   const [quantityToAdd, setQuantityToAdd] = useState(1)
-  const [product, setProduct] = useState(null)
+  const [item, setItem] = useState(null)
   const { id } = useParams()
-  const { user } = useContext(UserContext)
-  const { addItem } = useContext(CartContext)
+  const dispatch = useDispatch()
+  const user = useSelector((state) => state.user.username)
 
   const increment = () => setQuantityToAdd((prev) => Math.max(prev + 1, 0))
   const decrement = () => setQuantityToAdd((prev) => Math.max(prev - 1, 0))
 
+  const buyItem = () =>
+    dispatch(addToCart({ user, item, quantity: quantityToAdd }))
+
   useEffect(() => {
     async function fetchData() {
-      const product = await fetchProductById(id)
-      setProduct(product)
+      const item = await fetchProductById(id)
+      setItem(item)
     }
     fetchData()
   }, [id])
 
   return (
     <>
-      {!product ? (
+      {!item ? (
         <Spinner />
       ) : (
         <div className='item-page paper'>
           <div className='item-page__image'>
-            <img src={product.images[0]} alt='' />
+            <img src={item.images[0]} alt='' />
           </div>
           <div className='item-page__info'>
             <div className='item-page__title'>
               <Typography variant='brand' size='md'>
-                {product.title}
+                {item.title}
               </Typography>
             </div>
             <div className='item-page__description'>
               <Typography variant='regular' size='sm'>
-                {product.description}
+                {item.description}
               </Typography>
               <Typography variant='regular' size='md'>
-                {product.price}.-
+                {item.price}.-
               </Typography>
             </div>
 
@@ -61,10 +65,7 @@ export function ItemPage() {
                       +
                     </Button>
                   </div>
-                  <Button
-                    variant='primary'
-                    onClick={() => addItem(product, quantityToAdd)}
-                  >
+                  <Button variant='primary' onClick={buyItem}>
                     Добавить в корзину
                   </Button>
                 </>

@@ -1,13 +1,14 @@
-import { useState, useEffect, useContext } from "react"
+import { useState, useEffect } from "react"
+import { useDispatch, useSelector } from "react-redux"
 import { Button, ItemCard, Spinner, Typography } from "../../components"
-import { CartContext, UserContext } from "../../context"
 import { fetchProducts } from "../../services"
+import { addToCart } from "../../store/slices"
 import "./MainPage.css"
 
 export function MainPage() {
   const [products, setProducts] = useState(null)
-  const { addItem } = useContext(CartContext)
-  const { user } = useContext(UserContext)
+  const dispatch = useDispatch()
+  const user = useSelector((state) => state.user.username)
 
   useEffect(() => {
     async function fetchData() {
@@ -30,7 +31,13 @@ export function MainPage() {
                 <ItemCard.Price>{item.price}</ItemCard.Price>
                 <ItemCard.Actions>
                   {user ? (
-                    <Button onClick={() => addItem(item, 1)}>Купить</Button>
+                    <Button
+                      onClick={() =>
+                        dispatch(addToCart({ user, item, quantity: 1 }))
+                      }
+                    >
+                      Купить
+                    </Button>
                   ) : (
                     <Typography variant='regular'>
                       Войдите, чтобы купить товар

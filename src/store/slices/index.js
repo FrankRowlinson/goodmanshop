@@ -6,3 +6,5 @@ export {
   removeFromCarts,
   clearCart,
 } from "./cartSlice"
+export { mainPageSlice } from "./mainPageSlice"
+export { itemDetailSlice } from "./itemDetailSlice"

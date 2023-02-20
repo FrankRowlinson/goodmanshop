@@ -5,18 +5,31 @@ import { fetchProducts } from "../../services"
 import { addToCart } from "../../store/slices"
 import "./MainPage.css"
 
+const limit = 20
+
 export function MainPage() {
-  const [products, setProducts] = useState(null)
+  const [products, setProducts] = useState([])
+  const [offset, setOffset] = useState(limit)
+  const [canFetchMore, setCanFetchMore] = useState(true)
   const dispatch = useDispatch()
   const user = useSelector((state) => state.user.username)
 
   useEffect(() => {
     async function fetchData() {
-      const data = await fetchProducts()
-      setProducts(data.slice(0, 24))
+      const data = await fetchProducts(0, limit)
+      setProducts(data)
     }
     fetchData()
   }, [])
+
+  const fetchMore = (offset) => async () => {
+    const data = await fetchProducts(offset, limit)
+    if (data.length < limit) {
+      setCanFetchMore(false)
+    }
+    setProducts((prev) => [...prev, ...data])
+    setOffset((prev) => prev + limit)
+  }
   return (
     <>
       {!products ? (
@@ -47,6 +60,11 @@ export function MainPage() {
               </ItemCard>
             )
           })}
+          {canFetchMore && (
+            <Button variant='primary' onClick={fetchMore(offset)}>
+              Загрузить еще товары
+            </Button>
+          )}
         </div>
       )}
     </>

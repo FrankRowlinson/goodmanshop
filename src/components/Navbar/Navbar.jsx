@@ -22,6 +22,11 @@ export function Navbar() {
     }, 0)
   }, [cart])
 
+  const handleLogout = () => {
+    dispatch(logout())
+    navigate(routes.HOME)
+  }
+
   const cartPositions = useMemo(() => cart.length, [cart])
 
   return (
@@ -56,7 +61,7 @@ export function Navbar() {
             Войти
           </Button>
         ) : (
-          <Button variant='inverted' onClick={() => dispatch(logout())}>
+          <Button variant='inverted' onClick={handleLogout}>
             Выйти
           </Button>
         )}

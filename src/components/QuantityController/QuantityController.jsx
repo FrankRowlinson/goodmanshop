@@ -7,7 +7,7 @@ export function QuantityController({ increment, decrement, count }) {
       <Button variant='icon' onClick={decrement}>
         –
       </Button>
-      <Typography variant='regular' size='md'>
+      <Typography variant='bold' size='sm'>
         {count}
       </Typography>
       <Button variant='icon' onClick={increment}>

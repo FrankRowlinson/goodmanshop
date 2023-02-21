@@ -25,10 +25,8 @@
 .cart-block {
   max-width: 300px;
   min-width: 300px;
-}
-
-.cart-block .btn {
   font-size: 16px;
+  color: white;
   display: flex;
   justify-self: center;
   align-items: center;

@@ -44,14 +44,14 @@ export function Navbar() {
       </div>
       {user && (
         <div className='cart-block'>
-          <Button variant='inverted' onClick={() => navigate(routes.CART)}>
+          {cart.length
+            ? `В корзине ${totalItemsInCart} товаров среди ${cartPositions} позиций на общую
+            сумму ${totalPrice}.-`
+            : "Ваша корзина пуста"}
+          <Button variant='icon' onClick={() => navigate(routes.CART)}>
             <div className='icon-container'>
               <CartIcon className='icon' />
             </div>
-            {cart.length
-              ? `В корзине ${totalItemsInCart} товаров среди ${cartPositions} позиций на общую
-        сумму ${totalPrice}.-`
-              : "Ваша корзина пуста"}
           </Button>
         </div>
       )}

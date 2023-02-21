@@ -26,16 +26,8 @@
   justify-content: flex-end;
 }
 
-.quantity-controller {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  width: 90px;
-  margin-right: 20px;
-  padding: 6px 10px;
-  background: #251749;
-  box-shadow: 3px 3px 0px #fffbeb;
-  margin-bottom: 3px;
+.item-page__cart > .btn {
+  margin-left: 20px;
 }
 
 .quantity-controller > .icon-btn {

@@ -1,7 +1,13 @@
 import { useState, useEffect } from "react"
 import { useDispatch, useSelector } from "react-redux"
 import { useParams } from "react-router-dom"
-import { Button, ErrorMessage, Spinner, Typography } from "../../components"
+import {
+  Button,
+  ErrorMessage,
+  Spinner,
+  Typography,
+  QuantityController,
+} from "../../components"
 import { addToCart } from "../../store/slices"
 import { fetchSingleItem } from "../../store/thunks/apiThunks"
 import "./ItemPage.css"
@@ -62,17 +68,11 @@ export function ItemPage() {
         <div className='item-page__cart'>
           {user ? (
             <>
-              <div className='quantity-controller'>
-                <Button variant='icon' onClick={decrement}>
-                  –
-                </Button>
-                <Typography variant='regular' size='md'>
-                  {quantityToAdd}
-                </Typography>
-                <Button variant='icon' onClick={increment}>
-                  +
-                </Button>
-              </div>
+              <QuantityController
+                increment={increment}
+                decrement={decrement}
+                count={quantityToAdd}
+              />
               <Button variant='primary' onClick={buyItem}>
                 Добавить в корзину
               </Button>

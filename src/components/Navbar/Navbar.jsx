@@ -1,5 +1,6 @@
 import { useMemo, useState } from "react"
 import { useDispatch, useSelector } from "react-redux"
+import { useNavigate } from "react-router-dom"
 import { Button, LoginModal, NavbarLink } from "../"
 import { routes } from "../../constants"
 import { selectCurrentCart, selectTotalPrice } from "../../store/selectors"
@@ -8,6 +9,7 @@ import "./Navbar.css"
 
 export function Navbar() {
   const dispatch = useDispatch()
+  const navigate = useNavigate()
   const [isLoginModalOpen, setIsLoginModalOpen] = useState(false)
   const user = useSelector((state) => state.user.username)
   const cart = useSelector(selectCurrentCart)
@@ -36,7 +38,7 @@ export function Navbar() {
       </div>
       {user && (
         <div className='cart-block'>
-          <Button variant='inverted'>
+          <Button variant='inverted' onClick={() => navigate(routes.CART)}>
             {cart.length
               ? `В корзине ${totalItemsInCart} товаров среди ${cartPositions} позиций на общую
         сумму ${totalPrice}.-`

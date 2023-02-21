@@ -3,7 +3,8 @@ export {
   cartSlice,
   addToCart,
   loadCarts,
-  removeFromCarts,
+  removeFromCart,
+  updateItemQuantity,
   clearCart,
 } from "./cartSlice"
 export { mainPageSlice } from "./mainPageSlice"

@@ -8,7 +8,14 @@ const buttonStyles = {
   icon: "icon-btn",
 }
 
-export function Button({ variant, children, onClick, type, path }) {
+export function Button({
+  variant,
+  children,
+  onClick,
+  type,
+  path,
+  ...restProps
+}) {
   const match = useMatch(path || "")
   return (
     <button
@@ -19,6 +26,7 @@ export function Button({ variant, children, onClick, type, path }) {
       }
       onClick={onClick}
       type={type || "button"}
+      {...restProps}
     >
       {children}
     </button>

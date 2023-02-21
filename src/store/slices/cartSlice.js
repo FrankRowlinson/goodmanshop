@@ -32,7 +32,19 @@ export const cartSlice = createSlice({
           id: item.id,
           quantity: quantity,
           price: item.price,
+          title: item.title,
         })
+      }
+      updateLocalStorage(state.carts)
+    },
+    updateItemQuantity: (state, action) => {
+      const { user, id, newQuantity } = action.payload
+      const itemIndex = state.carts[user].findIndex(
+        (prevItem) => prevItem.id === id
+      )
+      state.carts[user][itemIndex] = {
+        ...state.carts[user][itemIndex],
+        quantity: newQuantity,
       }
       updateLocalStorage(state.carts)
     },
@@ -48,5 +60,10 @@ export const cartSlice = createSlice({
   },
 })
 
-export const { addToCart, loadCarts, removeFromCarts, clearCart } =
-  cartSlice.actions
+export const {
+  addToCart,
+  loadCarts,
+  removeFromCart,
+  clearCart,
+  updateItemQuantity,
+} = cartSlice.actions

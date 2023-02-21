@@ -6,6 +6,7 @@ import { routes } from "../../constants"
 import { selectCurrentCart, selectTotalPrice } from "../../store/selectors"
 import { logout } from "../../store/slices"
 import "./Navbar.css"
+import { ReactComponent as CartIcon } from "../../icons/cart-icon.svg"
 
 export function Navbar() {
   const dispatch = useDispatch()
@@ -39,6 +40,7 @@ export function Navbar() {
       {user && (
         <div className='cart-block'>
           <Button variant='inverted' onClick={() => navigate(routes.CART)}>
+            <CartIcon className='icon' />
             {cart.length
               ? `В корзине ${totalItemsInCart} товаров среди ${cartPositions} позиций на общую
         сумму ${totalPrice}.-`

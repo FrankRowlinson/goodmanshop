@@ -1,5 +1,6 @@
 .item-page {
   display: flex;
+  align-items: flex-start;
   width: 800px;
   flex-wrap: wrap;
   margin: 10px 15px;
@@ -24,6 +25,7 @@
 .item-page__cart {
   display: flex;
   justify-content: flex-end;
+  align-self: flex-end;
 }
 
 .item-page__cart > .btn {

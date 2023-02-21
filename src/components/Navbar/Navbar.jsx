@@ -40,7 +40,9 @@ export function Navbar() {
       {user && (
         <div className='cart-block'>
           <Button variant='inverted' onClick={() => navigate(routes.CART)}>
-            <CartIcon className='icon' />
+            <div className='icon-container'>
+              <CartIcon className='icon' />
+            </div>
             {cart.length
               ? `В корзине ${totalItemsInCart} товаров среди ${cartPositions} позиций на общую
         сумму ${totalPrice}.-`

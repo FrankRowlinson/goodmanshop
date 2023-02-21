@@ -60,7 +60,7 @@ export function ItemPage() {
           <Typography variant='regular' size='sm'>
             {item.description}
           </Typography>
-          <Typography variant='regular' size='md'>
+          <Typography variant='regular' size='lg'>
             {item.price}.-
           </Typography>
         </div>

@@ -5,6 +5,9 @@ const initialState = {
   loading: false,
   error: null,
   items: [],
+  offset: 0,
+  limit: 20,
+  canLoadMore: false,
 }
 
 export const mainPageSlice = createSlice({
@@ -14,11 +17,19 @@ export const mainPageSlice = createSlice({
   extraReducers: (builder) => {
     builder
       .addCase(fetchItemPage.pending, (state) => {
-        state.loading = true
+        if (state.items.length === 0) {
+          state.loading = true
+        }
       })
       .addCase(fetchItemPage.fulfilled, (state, action) => {
         state.loading = false
+        if (action.payload.length < state.limit) {
+          state.canLoadMore = false
+        } else {
+          state.canLoadMore = true
+        }
         state.items.push(...action.payload)
+        state.offset = state.offset + state.limit
       })
       .addCase(fetchItemPage.rejected, (state, action) => {
         state.loading = false

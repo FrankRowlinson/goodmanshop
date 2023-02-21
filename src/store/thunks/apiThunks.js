@@ -25,6 +25,9 @@ export const fetchItemPage = createAsyncThunk(
         `${endPoints.products}?offset=${offset}&limit=${limit}`
       )
       const data = await response.json()
+      if (data.name && data.name.endsWith("Error")) {
+        return rejectWithValue(data)
+      }
       return data
     } catch (err) {
       return rejectWithValue(err)

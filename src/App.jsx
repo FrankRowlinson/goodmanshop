@@ -5,6 +5,7 @@ import { Navbar } from "./components"
 import { useDispatch } from "react-redux"
 import { useEffect } from "react"
 import { loadCarts } from "./store/slices"
+import { routes } from "./constants"
 
 function App() {
   const dispatch = useDispatch()
@@ -18,9 +19,9 @@ function App() {
       <Navbar />
       <div className='App'>
         <Routes>
-          <Route path='/' element={<MainPage />} />
-          <Route path='/about' element={<AboutPage />} />
-          <Route path='/products/:id' element={<ItemPage />} />
+          <Route path={routes.HOME} element={<MainPage />} />
+          <Route path={routes.ABOUT} element={<AboutPage />} />
+          <Route path={`${routes.PRODUCTS}/:id`} element={<ItemPage />} />
           <Route path='*' element={<NotFoundPage />} />
         </Routes>
       </div>

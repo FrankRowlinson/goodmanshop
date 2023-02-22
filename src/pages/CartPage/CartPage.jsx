@@ -3,7 +3,6 @@ import {
   Button,
   ErrorMessage,
   QuantityController,
-  Spinner,
   Typography,
 } from "../../components"
 import { selectTotalPrice } from "../../store/selectors"
@@ -23,10 +22,6 @@ export function CartPage() {
         свой аккаунт.
       </ErrorMessage>
     )
-  }
-
-  if (!cart) {
-    return <Spinner />
   }
 
   return (
